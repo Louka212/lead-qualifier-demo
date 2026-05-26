@@ -1,0 +1,44 @@
+[
+  {
+    "id": "sample01",
+    "created_at": "2026-05-25T14:12:08",
+    "name": "Sara Lopez",
+    "contact": "sara@growthcoach.com",
+    "project_type": "New website for my coaching business",
+    "budget": "around $3,000",
+    "timeline": "next month",
+    "qualified": true,
+    "score": 92,
+    "recommended_action": "book_call",
+    "summary": "Sara wants a new coaching website (budget ~$3k, timeline next month) — strong fit.",
+    "transcript": []
+  },
+  {
+    "id": "sample02",
+    "created_at": "2026-05-25T10:47:31",
+    "name": "Marcus Bell",
+    "contact": "marcus@bellfitness.co",
+    "project_type": "Add online booking + automation to my gym site",
+    "budget": "$1,500",
+    "timeline": "this quarter",
+    "qualified": true,
+    "score": 71,
+    "recommended_action": "email_followup",
+    "summary": "Marcus wants booking + automation on his gym site (budget $1.5k) — warm, follow up.",
+    "transcript": []
+  },
+  {
+    "id": "sample03",
+    "created_at": "2026-05-24T19:03:55",
+    "name": "Unknown",
+    "contact": "Not provided",
+    "project_type": "Just browsing — maybe a logo someday",
+    "budget": "not sure",
+    "timeline": "no rush",
+    "qualified": false,
+    "score": 28,
+    "recommended_action": "nurture",
+    "summary": "Low-intent visitor, no contact shared — nurture.",
+    "transcript": []
+  }
+]

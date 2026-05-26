@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Leads — {{ business.name }}</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,Segoe UI,Roboto,sans-serif}
+  body{background:#f6f8fb;color:#16202e;padding:32px}
+  h1{font-size:26px}.sub{color:#5b6677;margin:4px 0 22px}
+  .stats{display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+  .stat{background:#fff;border:1px solid #eef1f5;border-radius:14px;padding:16px 22px;min-width:130px}
+  .stat .n{font-size:30px;font-weight:800}.stat .l{color:#5b6677;font-size:13px}
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid #f0f2f6;font-size:14px;vertical-align:top}
+  th{background:#0b1220;color:#cdd9f2;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+  .score{font-weight:800}
+  .pill{display:inline-block;padding:3px 10px;border-radius:50px;font-size:12px;font-weight:700}
+  .book_call{background:#e6f7ef;color:#1d8a5b}.email_followup{background:#fff3e0;color:#b3691a}.nurture{background:#eef1f5;color:#5b6677}
+  .q-yes{color:#1d8a5b;font-weight:700}.q-no{color:#b94a48;font-weight:700}
+  .empty{background:#fff;border:1px dashed #d6dce5;border-radius:14px;padding:40px;text-align:center;color:#8a94a3}
+  a.back{color:#1f4ed8;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+  <a class="back" href="/">← back to demo site</a>
+  <h1 style="margin-top:10px">Lead inbox</h1>
+  <div class="sub">{{ business.name }} · ranked by score · qualified leads route to a booked call automatically</div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">{{ stats.total }}</div><div class="l">total leads</div></div>
+    <div class="stat"><div class="n">{{ stats.qualified }}</div><div class="l">qualified</div></div>
+    <div class="stat"><div class="n">{{ stats.book_call }}</div><div class="l">→ book a call</div></div>
+  </div>
+
+  {% if leads %}
+  <table>
+    <tr><th>Score</th><th>Name</th><th>Contact</th><th>Project</th><th>Budget</th><th>Timeline</th><th>Qualified</th><th>Action</th><th>Summary</th><th>When</th></tr>
+    {% for l in leads %}
+    <tr>
+      <td class="score">{{ l.score }}</td>
+      <td>{{ l.name }}</td>
+      <td>{{ l.contact }}</td>
+      <td>{{ l.project_type }}</td>
+      <td>{{ l.budget }}</td>
+      <td>{{ l.timeline }}</td>
+      <td>{% if l.qualified %}<span class="q-yes">✓ yes</span>{% else %}<span class="q-no">✕ no</span>{% endif %}</td>
+      <td><span class="pill {{ l.recommended_action }}">{{ l.recommended_action.replace('_',' ') }}</span></td>
+      <td>{{ l.summary }}</td>
+      <td>{{ l.created_at }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <div class="empty">No leads captured yet. Open the <a href="/">demo site</a> and chat with the assistant.</div>
+  {% endif %}
+</body>
+</html>
