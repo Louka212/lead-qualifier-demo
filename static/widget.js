@@ -1,6 +1,6 @@
 /* LoukaBuilds AI Lead-Qualifier — embeddable chat widget.
  * Drop onto any site with ONE line:
- *   <script src="https://lead-qualifier.onrender.com/widget.js"
+ *   <script src="https://lead-qualifier-zxl9.onrender.com/widget.js"
  *           data-name="Northbeam Studio" data-accent="#1f4ed8"></script>
  * Self-contained: injects its own styles, talks to /api/chat on the host origin.
  * The greeting is display-only; the messages array sent to the API starts with the
