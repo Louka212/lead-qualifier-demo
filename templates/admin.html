@@ -4,55 +4,119 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Leads — {{ business.name }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,Segoe UI,Roboto,sans-serif}
-  body{background:#f6f8fb;color:#16202e;padding:32px}
-  h1{font-size:26px}.sub{color:#5b6677;margin:4px 0 22px}
-  .stats{display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap}
-  .stat{background:#fff;border:1px solid #eef1f5;border-radius:14px;padding:16px 22px;min-width:130px}
-  .stat .n{font-size:30px;font-weight:800}.stat .l{color:#5b6677;font-size:13px}
-  table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid #f0f2f6;font-size:14px;vertical-align:top}
-  th{background:#0b1220;color:#cdd9f2;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
-  .score{font-weight:800}
-  .pill{display:inline-block;padding:3px 10px;border-radius:50px;font-size:12px;font-weight:700}
-  .book_call{background:#e6f7ef;color:#1d8a5b}.email_followup{background:#fff3e0;color:#b3691a}.nurture{background:#eef1f5;color:#5b6677}
-  .q-yes{color:#1d8a5b;font-weight:700}.q-no{color:#b94a48;font-weight:700}
-  .empty{background:#fff;border:1px dashed #d6dce5;border-radius:14px;padding:40px;text-align:center;color:#8a94a3}
-  a.back{color:#1f4ed8;text-decoration:none;font-weight:600}
+  :root{
+    --paper:#FBF4E9; --ink:#141210; --vermillion:#FF4D1C; --cobalt:#1B2BFF; --lime:#C6FF4D;
+    --shadow:6px 6px 0 var(--ink); --shadow-sm:4px 4px 0 var(--ink);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--paper); color:var(--ink); padding:clamp(20px,4vw,40px);
+    font-family:"Hanken Grotesk",-apple-system,Segoe UI,Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--ink) 1.1px, transparent 1.1px);
+    background-size:26px 26px; background-position:-13px -13px;
+  }
+  .wrap{max-width:1280px; margin:0 auto}
+  a.back{
+    display:inline-flex; align-items:center; gap:6px; color:var(--ink); text-decoration:none;
+    font-family:"Space Mono",monospace; font-size:13px; font-weight:700; text-transform:uppercase;
+    letter-spacing:1px; padding:8px 14px; border:2.5px solid var(--ink); border-radius:50px;
+    background:#fff; box-shadow:var(--shadow-sm); transition:transform .12s,box-shadow .12s;
+  }
+  a.back:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--ink)}
+  h1{font-family:"Bricolage Grotesque",sans-serif; font-size:clamp(32px,5vw,48px); font-weight:800; letter-spacing:-1.5px; margin-top:18px}
+  .sub{color:#6b6358; margin:6px 0 26px; font-family:"Space Mono",monospace; font-size:13px; letter-spacing:.3px}
+
+  /* ---- stat cards ---- */
+  .stats{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-bottom:28px}
+  @media (max-width:640px){.stats{grid-template-columns:1fr}}
+  .stat{
+    border:3px solid var(--ink); border-radius:18px; padding:22px 24px; box-shadow:var(--shadow);
+    position:relative; overflow:hidden;
+  }
+  .stat.s1{background:var(--vermillion); color:var(--paper)}
+  .stat.s2{background:var(--cobalt); color:var(--paper)}
+  .stat.s3{background:var(--lime); color:var(--ink)}
+  .stat .n{font-family:"Bricolage Grotesque",sans-serif; font-size:54px; font-weight:800; line-height:1; letter-spacing:-2px}
+  .stat .l{font-family:"Space Mono",monospace; font-size:12px; text-transform:uppercase; letter-spacing:1px; font-weight:700; margin-top:8px; opacity:.92}
+
+  /* ---- table ---- */
+  .tbl-shell{border:3px solid var(--ink); border-radius:18px; overflow:hidden; box-shadow:var(--shadow); background:#fff}
+  .tbl-scroll{overflow-x:auto}
+  table{width:100%; border-collapse:collapse; min-width:920px}
+  th,td{text-align:left; padding:14px 16px; border-bottom:2px solid #efe7d8; font-size:14px; vertical-align:top}
+  th{
+    background:var(--ink); color:var(--paper); font-family:"Space Mono",monospace; font-size:11px;
+    text-transform:uppercase; letter-spacing:1px; font-weight:700; border-bottom:3px solid var(--ink);
+  }
+  tbody tr{transition:background .12s}
+  tbody tr:hover{background:#fffaf0}
+  tbody tr:last-child td{border-bottom:none}
+  td.name{font-weight:700}
+  .score{
+    font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:24px; line-height:1;
+    display:inline-flex; align-items:center; justify-content:center; min-width:46px; padding:6px 8px;
+    border:2.5px solid var(--ink); border-radius:11px; background:var(--paper); box-shadow:3px 3px 0 var(--ink);
+  }
+  .pill{
+    display:inline-block; padding:5px 12px; border-radius:50px; font-size:12px; font-weight:800;
+    border:2.5px solid var(--ink); font-family:"Bricolage Grotesque",sans-serif; white-space:nowrap;
+  }
+  .book_call{background:var(--lime); color:var(--ink)}
+  .email_followup{background:var(--vermillion); color:var(--paper)}
+  .nurture{background:#fff; color:var(--ink)}
+  .q-yes{color:var(--ink); font-weight:800; font-family:"Space Mono",monospace; font-size:13px}
+  .q-no{color:#b94a48; font-weight:800; font-family:"Space Mono",monospace; font-size:13px}
+  td.summary{max-width:260px; color:#3b352e; font-weight:500}
+  td.when{font-family:"Space Mono",monospace; font-size:12px; color:#6b6358; white-space:nowrap}
+  .empty{
+    background:#fff; border:3px dashed var(--ink); border-radius:18px; padding:48px;
+    text-align:center; color:#6b6358; font-family:"Space Mono",monospace; box-shadow:var(--shadow);
+  }
+  .empty a{color:var(--vermillion); font-weight:700}
 </style>
 </head>
 <body>
-  <a class="back" href="/">← back to demo site</a>
-  <h1 style="margin-top:10px">Lead inbox</h1>
-  <div class="sub">{{ business.name }} · ranked by score · qualified leads route to a booked call automatically</div>
+  <div class="wrap">
+    <a class="back" href="/">← back to demo site</a>
+    <h1>Lead inbox</h1>
+    <div class="sub">{{ business.name }} · ranked by score · qualified leads route to a booked call automatically</div>
 
-  <div class="stats">
-    <div class="stat"><div class="n">{{ stats.total }}</div><div class="l">total leads</div></div>
-    <div class="stat"><div class="n">{{ stats.qualified }}</div><div class="l">qualified</div></div>
-    <div class="stat"><div class="n">{{ stats.book_call }}</div><div class="l">→ book a call</div></div>
+    <div class="stats">
+      <div class="stat s1"><div class="n">{{ stats.total }}</div><div class="l">total leads</div></div>
+      <div class="stat s2"><div class="n">{{ stats.qualified }}</div><div class="l">qualified</div></div>
+      <div class="stat s3"><div class="n">{{ stats.book_call }}</div><div class="l">→ book a call</div></div>
+    </div>
+
+    {% if leads %}
+    <div class="tbl-shell">
+      <div class="tbl-scroll">
+      <table>
+        <tr><th>Score</th><th>Name</th><th>Contact</th><th>Project</th><th>Budget</th><th>Timeline</th><th>Qualified</th><th>Action</th><th>Summary</th><th>When</th></tr>
+        {% for l in leads %}
+        <tr>
+          <td><span class="score">{{ l.score }}</span></td>
+          <td class="name">{{ l.name }}</td>
+          <td>{{ l.contact }}</td>
+          <td>{{ l.project_type }}</td>
+          <td>{{ l.budget }}</td>
+          <td>{{ l.timeline }}</td>
+          <td>{% if l.qualified %}<span class="q-yes">✓ yes</span>{% else %}<span class="q-no">✕ no</span>{% endif %}</td>
+          <td><span class="pill {{ l.recommended_action }}">{{ l.recommended_action.replace('_',' ') }}</span></td>
+          <td class="summary">{{ l.summary }}</td>
+          <td class="when">{{ l.created_at }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      </div>
+    </div>
+    {% else %}
+    <div class="empty">No leads captured yet. Open the <a href="/">demo site</a> and chat with the assistant.</div>
+    {% endif %}
   </div>
-
-  {% if leads %}
-  <table>
-    <tr><th>Score</th><th>Name</th><th>Contact</th><th>Project</th><th>Budget</th><th>Timeline</th><th>Qualified</th><th>Action</th><th>Summary</th><th>When</th></tr>
-    {% for l in leads %}
-    <tr>
-      <td class="score">{{ l.score }}</td>
-      <td>{{ l.name }}</td>
-      <td>{{ l.contact }}</td>
-      <td>{{ l.project_type }}</td>
-      <td>{{ l.budget }}</td>
-      <td>{{ l.timeline }}</td>
-      <td>{% if l.qualified %}<span class="q-yes">✓ yes</span>{% else %}<span class="q-no">✕ no</span>{% endif %}</td>
-      <td><span class="pill {{ l.recommended_action }}">{{ l.recommended_action.replace('_',' ') }}</span></td>
-      <td>{{ l.summary }}</td>
-      <td>{{ l.created_at }}</td>
-    </tr>
-    {% endfor %}
-  </table>
-  {% else %}
-  <div class="empty">No leads captured yet. Open the <a href="/">demo site</a> and chat with the assistant.</div>
-  {% endif %}
 </body>
 </html>
