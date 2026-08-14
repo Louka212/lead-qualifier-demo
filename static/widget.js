@@ -1,4 +1,4 @@
-/* LoukaBuilds AI Lead-Qualifier — embeddable chat widget.
+/* Compound Studio AI Lead-Qualifier — embeddable chat widget.
  * Drop onto any site with ONE line:
  *   <script src="https://lead-qualifier-zxl9.onrender.com/widget.js"
  *           data-name="Northbeam Studio" data-accent="#1f4ed8"></script>
@@ -75,7 +75,7 @@
     '<div class="lqb-hd"><div>' + esc(NAME) + '<small>Typically replies instantly</small></div>' +
     '<button class="lqb-x" aria-label="Close">×</button></div>' +
     '<div class="lqb-body"></div>' +
-    '<div class="lqb-credit">⚡ AI assistant by <a href="https://loukabuilds.com" target="_blank" rel="noopener">LoukaBuilds</a></div>' +
+    '<div class="lqb-credit">⚡ AI assistant by <a href="https://compoundstudio.io" target="_blank" rel="noopener">Compound Studio</a></div>' +
     '<form class="lqb-foot"><input class="lqb-in" placeholder="Type your message…" autocomplete="off" maxlength="1000"/>' +
     '<button class="lqb-send" type="submit">Send</button></form>';
   document.body.appendChild(btn);
