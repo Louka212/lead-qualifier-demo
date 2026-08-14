@@ -23,7 +23,7 @@ MODEL = os.environ.get("QUALIFIER_MODEL", "claude-haiku-4-5-20251001")
 BUSINESS = {
     "name": "Northbeam Studio",
     "tagline": "websites, apps & automation for growing brands",
-    "booking_url": os.environ.get("BOOKING_URL", "https://compoundstudio.io/#contact"),
+    "booking_url": os.environ.get("BOOKING_URL", "https://calendly.com/compound-studio/30min"),
     # what this business sells — shapes the qualifying questions
     "offerings": ["website design", "web apps", "AI automation", "SEO"],
     "qualified_min_budget": 1000,  # USD; below this → nurture, not a booked call
