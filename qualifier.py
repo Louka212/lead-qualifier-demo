@@ -17,7 +17,7 @@ import json
 import os
 import re
 
-MODEL = os.environ.get("QUALIFIER_MODEL", "claude-haiku-4-5-20251001")
+MODEL = os.environ.get("QUALIFIER_MODEL", "claude-haiku-4-5")
 
 # The demo "host" business. Each client customizes this block.
 BUSINESS = {
