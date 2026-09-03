@@ -91,8 +91,9 @@ def _run_claude(messages: list[dict], business: dict) -> dict:
     resp = client.messages.create(
         model=MODEL,
         max_tokens=400,
-        system=[{"type": "text", "text": _system_prompt(business),
-                 "cache_control": {"type": "ephemeral"}}],
+        # ~250 tokens — under Haiku 4.5's 4096-token cache minimum, so no cache_control
+        # (re-add if the widget moves to a model with a 512-token minimum).
+        system=_system_prompt(business),
         tools=[CAPTURE_TOOL],
         messages=messages,
     )
